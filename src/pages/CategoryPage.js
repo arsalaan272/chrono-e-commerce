@@ -4,7 +4,7 @@ import { Box, Container, Typography, Breadcrumbs, Link } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 import ProductList from '../components/ProductList';
-import products from '../data/products';
+import { getProductsByCategory } from '../services/productService';
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -16,27 +16,52 @@ const CategoryPage = () => {
   });
   
   useEffect(() => {
-    // Set category products based on URL parameter
-    if (category === 'watches') {
-      setCategoryProducts(products.watches);
-      setCategoryInfo({
+    // Get products by category
+    const categoryProducts = getProductsByCategory(category);
+    setCategoryProducts(categoryProducts);
+    
+    // Set category info based on URL parameter
+    const categoryMap = {
+      'smart-watches': {
+        title: 'Smart Watches',
+        description: 'Discover our exclusive collection of smart watches and fitness trackers. From advanced health monitoring to stylish designs, find the perfect wearable to match your lifestyle.',
+        image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop'
+      },
+      'smart-mobiles': {
+        title: 'Smart Mobiles',
+        description: 'Explore our range of premium smartphones with cutting-edge technology. From flagship devices to budget-friendly options, find the perfect phone for your needs.',
+        image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=1000&auto=format&fit=crop'
+      },
+      'laptops': {
+        title: 'Laptops',
+        description: "Browse our collection of powerful laptops designed for every need. Whether you're a student, professional, or gamer, we have the perfect solution for you.",
+        image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1000&auto=format&fit=crop'
+      },
+      'grocery': {
+        title: 'Grocery',
+        description: 'Shop fresh groceries and everyday essentials. From organic produce to pantry staples, we have everything you need for your home.',
+        image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop'
+      },
+      'watches': {
         title: 'Luxury Watches',
         description: 'Discover our exclusive collection of premium watches. From elegant chronographs to smart fitness trackers, find the perfect timepiece to match your style and needs.',
         image: 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000&auto=format&fit=crop'
-      });
-    } else if (category === 'computers') {
-      setCategoryProducts(products.computers);
-      setCategoryInfo({
+      },
+      'computers': {
         title: 'High-Performance Computers',
         description: "Explore our range of powerful computers designed for every need. Whether you're a gamer seeking ultimate performance, a professional requiring a reliable workstation, or simply looking for an everyday PC, we have the perfect solution for you.",
         image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop'
-      });
+      },
+    };
+
+    if (categoryMap[category]) {
+      setCategoryInfo(categoryMap[category]);
     } else {
       // Default to all products if category is not recognized
-      setCategoryProducts([...products.watches, ...products.computers]);
+      const categoryName = category ? category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'All';
       setCategoryInfo({
-        title: 'All Products',
-        description: 'Browse our complete collection of premium watches and high-performance computers.',
+        title: categoryName === 'All' ? 'All Products' : categoryName,
+        description: `Browse our complete collection of ${categoryName.toLowerCase()} products.`,
         image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1000&auto=format&fit=crop'
       });
     }

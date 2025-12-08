@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
 
 // Initial state for the cart
 const initialState = {
@@ -75,6 +75,9 @@ const cartReducer = (state, action) => {
     case 'CLEAR_CART':
       return initialState;
 
+    case 'REPLACE_CART':
+      return action.payload;
+
     default:
       return state;
   }
@@ -83,6 +86,7 @@ const cartReducer = (state, action) => {
 // Cart provider component
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [notification, setNotification] = useState({ open: false, message: '' });
 
   // Load cart from localStorage on initial render
   useEffect(() => {
@@ -111,6 +115,10 @@ export const CartProvider = ({ children }) => {
   // Cart actions
   const addToCart = (product) => {
     dispatch({ type: 'ADD_TO_CART', payload: product });
+    setNotification({ 
+      open: true, 
+      message: `${product.name} added to cart successfully!` 
+    });
   };
 
   const removeFromCart = (product) => {
@@ -121,6 +129,10 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: 'CLEAR_CART' });
   };
 
+  const closeNotification = () => {
+    setNotification({ open: false, message: '' });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -128,6 +140,8 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         clearCart,
+        notification,
+        closeNotification,
       }}
     >
       {children}

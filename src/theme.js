@@ -1,7 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
+const getTheme = (mode) => createTheme({
   palette: {
+    mode,
     primary: {
       main: '#2E3B55', // Deep blue
       light: '#4F5B75',
@@ -15,13 +16,14 @@ const theme = createTheme({
       contrastText: '#ffffff',
     },
     background: {
-      default: '#f5f5f7',
-      paper: '#ffffff',
+      default: mode === 'light' ? '#f5f5f7' : '#121212',
+      paper: mode === 'light' ? '#ffffff' : '#1e1e1e',
     },
     text: {
-      primary: '#333333',
-      secondary: '#666666',
+      primary: mode === 'light' ? '#333333' : '#ffffff',
+      secondary: mode === 'light' ? '#666666' : '#b0b0b0',
     },
+    divider: mode === 'light' ? 'rgba(0, 0, 0, 0.12)' : 'rgba(255, 255, 255, 0.12)',
   },
   typography: {
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -63,11 +65,15 @@ const theme = createTheme({
         root: {
           borderRadius: 30,
           padding: '8px 24px',
-          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.15)',
+          boxShadow: mode === 'light' 
+            ? '0 4px 10px rgba(0, 0, 0, 0.15)' 
+            : '0 4px 10px rgba(0, 0, 0, 0.4)',
           transition: 'all 0.3s ease',
           '&:hover': {
             transform: 'translateY(-2px)',
-            boxShadow: '0 6px 15px rgba(0, 0, 0, 0.2)',
+            boxShadow: mode === 'light'
+              ? '0 6px 15px rgba(0, 0, 0, 0.2)'
+              : '0 6px 15px rgba(0, 0, 0, 0.5)',
           },
         },
         containedPrimary: {
@@ -81,11 +87,15 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
+          boxShadow: mode === 'light'
+            ? '0 8px 24px rgba(0, 0, 0, 0.1)'
+            : '0 8px 24px rgba(0, 0, 0, 0.4)',
           transition: 'all 0.3s ease',
           '&:hover': {
             transform: 'translateY(-5px)',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.15)',
+            boxShadow: mode === 'light'
+              ? '0 12px 30px rgba(0, 0, 0, 0.15)'
+              : '0 12px 30px rgba(0, 0, 0, 0.5)',
           },
         },
       },
@@ -93,11 +103,24 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          boxShadow: mode === 'light'
+            ? '0 4px 20px rgba(0, 0, 0, 0.1)'
+            : '0 4px 20px rgba(0, 0, 0, 0.3)',
+          backgroundColor: mode === 'light' 
+            ? 'rgba(255, 255, 255, 0.8)' 
+            : 'rgba(30, 30, 30, 0.8)',
+          backdropFilter: 'blur(10px)',
+        },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          transition: 'background-color 0.3s ease, color 0.3s ease',
         },
       },
     },
   },
 });
 
-export default theme; 
+export default getTheme; 

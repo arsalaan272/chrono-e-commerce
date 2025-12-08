@@ -21,19 +21,28 @@ import {
   ShoppingCart as ShoppingCartIcon, 
   Menu as MenuIcon,
   Watch as WatchIcon,
-  Computer as ComputerIcon,
+  PhoneAndroid as PhoneIcon,
+  Laptop as LaptopIcon,
+  ShoppingBasket as GroceryIcon,
   Home as HomeIcon,
   Info as InfoIcon
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
+import ThemeToggle from './ThemeToggle';
 import styled from 'styled-components';
 
 // Styled components
 const StyledAppBar = styled(AppBar)`
-  background: rgba(255, 255, 255, 0.8);
+  background: ${props => props.theme?.palette?.mode === 'dark' 
+    ? 'rgba(30, 30, 30, 0.8)' 
+    : 'rgba(255, 255, 255, 0.8)'};
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: ${props => props.theme?.palette?.mode === 'dark'
+    ? '0 4px 30px rgba(0, 0, 0, 0.3)'
+    : '0 4px 30px rgba(0, 0, 0, 0.1)'};
+  color: ${props => props.theme?.palette?.text?.primary || '#333333'};
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 `;
 
 const NavLink = styled(Button)`
@@ -95,8 +104,10 @@ const Navbar = () => {
 
   const navLinks = [
     { text: 'Home', path: '/', icon: <HomeIcon /> },
-    { text: 'Watches', path: '/category/watches', icon: <WatchIcon /> },
-    { text: 'Computers', path: '/category/computers', icon: <ComputerIcon /> },
+    { text: 'Watches', path: '/category/smart-watches', icon: <WatchIcon /> },
+    { text: 'Mobiles', path: '/category/smart-mobiles', icon: <PhoneIcon /> },
+    { text: 'Laptops', path: '/category/laptops', icon: <LaptopIcon /> },
+    { text: 'Grocery', path: '/category/grocery', icon: <GroceryIcon /> },
     { text: 'About', path: '/about', icon: <InfoIcon /> },
   ];
 
@@ -128,7 +139,7 @@ const Navbar = () => {
             >
               <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
                 <LogoText variant="h5" component="div" sx={{ flexGrow: 0, mr: 2 }}>
-                  CHRONO TECH
+                  CHRONO E-COMMERCE
                 </LogoText>
               </Link>
             </motion.div>
@@ -153,6 +164,9 @@ const Navbar = () => {
               </Box>
             )}
 
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Cart Icon */}
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <IconButton 
@@ -160,7 +174,7 @@ const Navbar = () => {
                 to="/cart" 
                 color="primary" 
                 aria-label="cart"
-                sx={{ ml: 2 }}
+                sx={{ ml: 1 }}
               >
                 <Badge badgeContent={cart.totalItems} color="secondary">
                   <ShoppingCartIcon />
@@ -198,7 +212,7 @@ const Navbar = () => {
         >
           <List>
             <ListItem>
-              <LogoText variant="h6">CHRONO TECH</LogoText>
+              <LogoText variant="h6">CHRONO E-COMMERCE</LogoText>
             </ListItem>
             <Divider sx={{ mb: 2 }} />
             {navLinks.map((link) => (
@@ -213,6 +227,13 @@ const Navbar = () => {
                 <ListItemText primary={link.text} />
               </ListItem>
             ))}
+            <Divider sx={{ my: 2 }} />
+            <ListItem>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                <Typography variant="body1">Theme</Typography>
+                <ThemeToggle />
+              </Box>
+            </ListItem>
           </List>
         </Box>
       </Drawer>

@@ -10,16 +10,18 @@ import {
   useMediaQuery 
 } from '@mui/material';
 import { 
-  Watch as WatchIcon,
-  Computer as ComputerIcon
+  Watch as WatchIcon
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 const HeroContainer = styled(Box)`
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: ${props => props.theme?.palette?.mode === 'dark'
+    ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)'
+    : 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'};
   position: relative;
   overflow: hidden;
+  transition: background 0.3s ease;
   
   &::before {
     content: '';
@@ -29,7 +31,7 @@ const HeroContainer = styled(Box)`
     right: 0;
     bottom: 0;
     background: url('/images/pattern.svg');
-    opacity: 0.1;
+    opacity: ${props => props.theme?.palette?.mode === 'dark' ? '0.05' : '0.1'};
     z-index: 0;
   }
 `;
@@ -51,7 +53,8 @@ const ShapeBottom = styled(Box)`
   }
   
   .shape-fill {
-    fill: #FFFFFF;
+    fill: ${props => props.theme?.palette?.background?.default || '#FFFFFF'};
+    transition: fill 0.3s ease;
   }
 `;
 
@@ -145,14 +148,14 @@ const Hero = () => {
                     textShadow: '0px 2px 5px rgba(0,0,0,0.1)'
                   }}
                 >
-                  Luxury Watches & High-Performance PCs
+                  Your One-Stop E-Commerce Destination
                 </Typography>
               </motion.div>
               
               <motion.div variants={itemVariants}>
                 <Typography variant="h6" color="text.secondary" sx={{ mb: 4, lineHeight: 1.6 }}>
-                  Discover our exclusive collection of premium timepieces and cutting-edge computers.
-                  Elevate your style and performance with CHRONO TECH.
+                  Discover a wide range of products from smart watches and mobiles to laptops and groceries.
+                  Shop with confidence at CHRONO E-COMMERCE.
                 </Typography>
               </motion.div>
               
@@ -166,22 +169,22 @@ const Hero = () => {
                 }}>
                   <CategoryButton
                     component={Link}
-                    to="/category/watches"
+                    to="/products"
                     variant="contained"
                     color="primary"
                     startIcon={<WatchIcon />}
                   >
-                    Explore Watches
+                    Shop Now
                   </CategoryButton>
                   
                   <CategoryButton
                     component={Link}
-                    to="/category/computers"
+                    to="/category/smart-watches"
                     variant="contained"
                     color="secondary"
-                    startIcon={<ComputerIcon />}
+                    startIcon={<WatchIcon />}
                   >
-                    Browse Computers
+                    Browse Categories
                   </CategoryButton>
                 </Box>
               </motion.div>
@@ -224,91 +227,230 @@ const Hero = () => {
             </Box>
           </Grid>
           
-          {/* Hero Image */}
+          {/* Hero Image - Marquee Product Showcase */}
           <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>
-            <Box sx={{ position: 'relative', height: { xs: 300, md: 500 } }}>
-              <motion.div
-                variants={imageVariants}
-                style={{
+            <Box 
+              sx={{ 
+                position: 'relative', 
+                height: { xs: 300, md: 500 },
+                overflow: 'hidden',
+                borderRadius: 4,
+              }}
+            >
+              {/* Mist overlay at top with blur effect */}
+              <Box
+                sx={{
                   position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '25%',
+                  background: theme.palette.mode === 'dark'
+                    ? 'linear-gradient(to bottom, rgba(26, 26, 46, 1) 0%, rgba(26, 26, 46, 0.95) 30%, rgba(26, 26, 46, 0.7) 60%, rgba(26, 26, 46, 0) 100%)'
+                    : 'linear-gradient(to bottom, rgba(245, 247, 250, 1) 0%, rgba(245, 247, 250, 0.95) 30%, rgba(245, 247, 250, 0.7) 60%, rgba(245, 247, 250, 0) 100%)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                  transition: 'background 0.3s ease',
+                }}
+              />
+              
+              {/* Additional top mist layer for more depth */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: '15%',
+                  background: theme.palette.mode === 'dark'
+                    ? 'linear-gradient(to bottom, rgba(26, 26, 46, 1) 0%, rgba(26, 26, 46, 0) 100%)'
+                    : 'linear-gradient(to bottom, rgba(245, 247, 250, 1) 0%, rgba(245, 247, 250, 0) 100%)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  zIndex: 4,
+                  pointerEvents: 'none',
+                  transition: 'background 0.3s ease',
+                }}
+              />
+              
+              {/* Mist overlay at bottom with blur effect */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: '25%',
+                  background: theme.palette.mode === 'dark'
+                    ? 'linear-gradient(to top, rgba(26, 26, 46, 1) 0%, rgba(26, 26, 46, 0.95) 30%, rgba(26, 26, 46, 0.7) 60%, rgba(26, 26, 46, 0) 100%)'
+                    : 'linear-gradient(to top, rgba(245, 247, 250, 1) 0%, rgba(245, 247, 250, 0.95) 30%, rgba(245, 247, 250, 0.7) 60%, rgba(245, 247, 250, 0) 100%)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                  transition: 'background 0.3s ease',
+                }}
+              />
+              
+              {/* Additional bottom mist layer for more depth */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: '15%',
+                  background: theme.palette.mode === 'dark'
+                    ? 'linear-gradient(to top, rgba(26, 26, 46, 1) 0%, rgba(26, 26, 46, 0) 100%)'
+                    : 'linear-gradient(to top, rgba(245, 247, 250, 1) 0%, rgba(245, 247, 250, 0) 100%)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  zIndex: 4,
+                  pointerEvents: 'none',
+                  transition: 'background 0.3s ease',
+                }}
+              />
+              
+              {/* Marquee Container */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
                   width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
+                  height: '200%', // Double height for seamless loop
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(2, 1fr)',
+                  gridTemplateRows: 'repeat(4, 1fr)', // 4 rows for seamless loop
+                  gap: 2,
+                  p: 2,
+                }}
+                component={motion.div}
+                animate={{
+                  y: ['0%', '-50%'], // Move from 0 to -50% to loop seamlessly
+                }}
+                transition={{
+                  duration: 20, // Slow scroll
+                  repeat: Infinity,
+                  ease: 'linear',
                 }}
               >
-                {/* Replace placeholder with actual image */}
+                {/* First set of images */}
+                {/* Top Left - Smart Watch */}
                 <Box
                   sx={{
-                    width: '80%',
-                    height: '80%',
-                    background: 'url(https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=1000&auto=format&fit=crop)',
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500&auto=format&fit=crop)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    borderRadius: 4,
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
                   }}
                 />
-              </motion.div>
-              
-              {/* Floating elements for decoration */}
-              <motion.div
-                initial={{ x: -20, y: -10 }}
-                animate={{ x: 0, y: 0 }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                  ease: 'easeInOut'
-                }}
-                style={{
-                  position: 'absolute',
-                  top: '20%',
-                  left: '10%',
-                  zIndex: 2
-                }}
-              >
+                
+                {/* Top Right - Smartphone */}
                 <Box
                   sx={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: '50%',
-                    background: theme.palette.primary.main,
-                    opacity: 0.2
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
                   }}
                 />
-              </motion.div>
-              
-              <motion.div
-                initial={{ x: 20, y: 10 }}
-                animate={{ x: 0, y: 0 }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                  ease: 'easeInOut'
-                }}
-                style={{
-                  position: 'absolute',
-                  bottom: '20%',
-                  right: '10%',
-                  zIndex: 2
-                }}
-              >
+                
+                {/* Bottom Left - Laptop */}
                 <Box
                   sx={{
-                    width: 80,
-                    height: 80,
-                    borderRadius: '50%',
-                    background: theme.palette.secondary.main,
-                    opacity: 0.2
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
                   }}
                 />
-              </motion.div>
+                
+                {/* Bottom Right - Grocery */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Duplicate set for seamless loop */}
+                {/* Top Left - Smart Watch */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Top Right - Smartphone */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Bottom Left - Laptop */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Bottom Right - Grocery */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+              </Box>
             </Box>
           </Grid>
         </Grid>

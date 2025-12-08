@@ -1,10 +1,10 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Button, Divider } from '@mui/material';
+import { Box, Container, Typography, Grid, Button, Divider, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import ProductList from '../components/ProductList';
-import products from '../data/products';
+import { getAllProducts } from '../services/productService';
 
 const FeaturedSection = ({ title, subtitle, children }) => {
   return (
@@ -41,6 +41,9 @@ const FeaturedSection = ({ title, subtitle, children }) => {
 };
 
 const CategoryBanner = ({ category, title, description, image, reverse }) => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+  
   return (
     <Box 
       component={motion.div}
@@ -50,11 +53,18 @@ const CategoryBanner = ({ category, title, description, image, reverse }) => {
       transition={{ duration: 0.5 }}
       sx={{ 
         py: 6, 
-        background: reverse ? 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' : 'white',
+        background: reverse 
+          ? (isDark 
+              ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' 
+              : 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)')
+          : theme.palette.background.paper,
         borderRadius: 4,
         overflow: 'hidden',
-        boxShadow: reverse ? '0 10px 30px rgba(0,0,0,0.1)' : 'none',
-        my: 8
+        boxShadow: reverse 
+          ? (isDark ? '0 10px 30px rgba(0,0,0,0.5)' : '0 10px 30px rgba(0,0,0,0.1)')
+          : 'none',
+        my: 8,
+        transition: 'background 0.3s ease, box-shadow 0.3s ease',
       }}
     >
       <Container maxWidth="lg">
@@ -124,11 +134,101 @@ const CategoryBanner = ({ category, title, description, image, reverse }) => {
   );
 };
 
+const NewsletterSection = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
+  return (
+    <Box 
+      sx={{ 
+        py: 10, 
+        background: isDark
+          ? 'linear-gradient(45deg, #1E2B45, #2E3B55)'
+          : 'linear-gradient(45deg, #2E3B55, #4F5B75)',
+        color: 'white',
+        textAlign: 'center',
+        transition: 'background 0.3s ease',
+      }}
+    >
+      <Container maxWidth="md">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <Typography variant="h3" component="h2" gutterBottom fontWeight="bold">
+            Stay Updated
+          </Typography>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
+            Subscribe to our newsletter for exclusive offers, new product announcements, and shopping tips.
+          </Typography>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <Box 
+            component="form" 
+            sx={{ 
+              display: 'flex', 
+              flexDirection: { xs: 'column', sm: 'row' }, 
+              gap: 2,
+              maxWidth: 600,
+              mx: 'auto'
+            }}
+          >
+            <input 
+              type="email" 
+              placeholder="Your email address" 
+              style={{ 
+                flex: 1, 
+                padding: '12px 20px', 
+                borderRadius: 30, 
+                border: 'none',
+                fontSize: '1rem',
+                outline: 'none',
+                color: '#333',
+                backgroundColor: 'white',
+              }} 
+            />
+            <Button 
+              variant="contained" 
+              color="secondary" 
+              size="large"
+              sx={{ 
+                borderRadius: 30, 
+                px: 4,
+                whiteSpace: 'nowrap'
+              }}
+            >
+              Subscribe Now
+            </Button>
+          </Box>
+        </motion.div>
+      </Container>
+    </Box>
+  );
+};
+
 const HomePage = () => {
-  // Get featured products (3 from each category)
-  const featuredWatches = products.watches.slice(0, 3);
-  const featuredComputers = products.computers.slice(0, 3);
-  const featuredProducts = [...featuredWatches, ...featuredComputers];
+  const theme = useTheme();
+  // Get all products (static + dynamic)
+  const allProducts = getAllProducts();
+  
+  // Get featured products (first 6 products)
+  const featuredProducts = allProducts.slice(0, 6);
   
   return (
     <Box>
@@ -138,7 +238,7 @@ const HomePage = () => {
       {/* Featured Products */}
       <FeaturedSection 
         title="Featured Products" 
-        subtitle="Discover our handpicked selection of premium watches and high-performance computers."
+        subtitle="Discover our handpicked selection of quality products across all categories."
       >
         <ProductList 
           products={featuredProducts} 
@@ -161,17 +261,17 @@ const HomePage = () => {
       
       {/* Category Banners */}
       <CategoryBanner 
-        category="watches"
-        title="Luxury Timepieces"
-        description="Discover our exclusive collection of premium watches. From elegant chronographs to smart fitness trackers, find the perfect timepiece to match your style and needs. Each watch is crafted with precision and attention to detail, ensuring both beauty and reliability."
+        category="smart-watches"
+        title="Smart Watches & Wearables"
+        description="Discover our exclusive collection of smart watches and fitness trackers. From elegant smartwatches to advanced fitness trackers, find the perfect wearable to match your lifestyle. Each device is designed with cutting-edge technology and premium quality."
         image="https://images.unsplash.com/photo-1619946794135-5bc917a27793?q=80&w=1000&auto=format&fit=crop"
         reverse={false}
       />
       
       <CategoryBanner 
-        category="computers"
-        title="High-Performance Computing"
-        description="Explore our range of powerful computers designed for every need. Whether you're a gamer seeking ultimate performance, a professional requiring a reliable workstation, or simply looking for an everyday PC, we have the perfect solution for you. All our computers feature the latest technology and premium components."
+        category="laptops"
+        title="Premium Laptops & Computing"
+        description="Explore our range of powerful laptops and computing devices designed for every need. Whether you're a student, professional, or gamer, we have the perfect solution for you. All our devices feature the latest technology and premium components."
         image="https://images.unsplash.com/photo-1593640495253-23196b27a87f?q=80&w=1000&auto=format&fit=crop"
         reverse={true}
       />
@@ -237,11 +337,15 @@ const HomePage = () => {
                       p: 4, 
                       borderRadius: 4,
                       height: '100%',
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                      boxShadow: theme.palette.mode === 'dark'
+                        ? '0 10px 30px rgba(0,0,0,0.4)'
+                        : '0 10px 30px rgba(0,0,0,0.1)',
                       transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                       '&:hover': {
                         transform: 'translateY(-10px)',
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.15)',
+                        boxShadow: theme.palette.mode === 'dark'
+                          ? '0 15px 35px rgba(0,0,0,0.6)'
+                          : '0 15px 35px rgba(0,0,0,0.15)',
                       }
                     }}
                   >
@@ -286,81 +390,7 @@ const HomePage = () => {
       </Box>
       
       {/* Newsletter Section */}
-      <Box 
-        sx={{ 
-          py: 10, 
-          background: 'linear-gradient(45deg, #2E3B55, #4F5B75)',
-          color: 'white',
-          textAlign: 'center'
-        }}
-      >
-        <Container maxWidth="md">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <Typography variant="h3" component="h2" gutterBottom fontWeight="bold">
-              Stay Updated
-            </Typography>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
-              Subscribe to our newsletter for exclusive offers, new product announcements, and tech tips.
-            </Typography>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Box 
-              component="form" 
-              sx={{ 
-                display: 'flex', 
-                flexDirection: { xs: 'column', sm: 'row' }, 
-                gap: 2,
-                maxWidth: 600,
-                mx: 'auto'
-              }}
-            >
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                style={{ 
-                  flex: 1, 
-                  padding: '12px 20px', 
-                  borderRadius: 30, 
-                  border: 'none',
-                  fontSize: '1rem',
-                  outline: 'none'
-                }} 
-              />
-              <Button 
-                variant="contained" 
-                color="secondary" 
-                size="large"
-                sx={{ 
-                  borderRadius: 30, 
-                  px: 4,
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                Subscribe Now
-              </Button>
-            </Box>
-          </motion.div>
-        </Container>
-      </Box>
+      <NewsletterSection />
     </Box>
   );
 };

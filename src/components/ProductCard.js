@@ -16,6 +16,7 @@ import {
   Favorite as FavoriteIcon,
   FavoriteBorder as FavoriteBorderIcon
 } from '@mui/icons-material';
+import { IconButton as MuiIconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useCart } from '../context/CartContext';
@@ -53,8 +54,14 @@ const OutOfStockOverlay = styled(Box)`
 `;
 
 const ProductCard = ({ product }) => {
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
   const [favorite, setFavorite] = React.useState(false);
+  const [isInCart, setIsInCart] = React.useState(false);
+  
+  React.useEffect(() => {
+    const itemInCart = cart.items.find(item => item.id === product.id);
+    setIsInCart(!!itemInCart);
+  }, [cart.items, product.id]);
   
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -115,7 +122,7 @@ const ProductCard = ({ product }) => {
               zIndex: 2
             }}
           >
-            <IconButton
+            <MuiIconButton
               onClick={toggleFavorite}
               sx={{
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -128,7 +135,7 @@ const ProductCard = ({ product }) => {
                 <FavoriteIcon color="secondary" /> : 
                 <FavoriteBorderIcon />
               }
-            </IconButton>
+            </MuiIconButton>
           </motion.div>
           
           {/* Out of stock overlay */}
@@ -151,7 +158,7 @@ const ProductCard = ({ product }) => {
           <Box sx={{ mb: 1 }}>
             <Stack direction="row" justifyContent="space-between" alignItems="center">
               <Typography variant="subtitle2" color="text.secondary">
-                {product.category === 'watches' ? 'Watch' : 'Computer'}
+                {product.category ? product.category.charAt(0).toUpperCase() + product.category.slice(1) : 'Product'}
               </Typography>
               <Rating value={product.rating} precision={0.5} size="small" readOnly />
             </Stack>
@@ -190,13 +197,21 @@ const ProductCard = ({ product }) => {
             >
               <Button
                 variant="contained"
-                color="primary"
+                color={isInCart ? "success" : "primary"}
                 size="small"
                 startIcon={<ShoppingCartIcon />}
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
+                sx={{
+                  ...(isInCart && {
+                    background: 'linear-gradient(45deg, #4caf50 30%, #66bb6a 90%)',
+                    '&:hover': {
+                      background: 'linear-gradient(45deg, #388e3c 30%, #4caf50 90%)',
+                    },
+                  }),
+                }}
               >
-                Add to Cart
+                {isInCart ? 'In Cart' : 'Add to Cart'}
               </Button>
             </motion.div>
           </Box>
@@ -205,22 +220,5 @@ const ProductCard = ({ product }) => {
     </motion.div>
   );
 };
-
-// IconButton component for the favorite button
-const IconButton = styled.button`
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
 
 export default ProductCard; 

@@ -29,7 +29,7 @@ import {
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import products from '../data/products';
+import { getProductById, getAllProducts } from '../services/productService';
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
@@ -44,9 +44,7 @@ const ProductDetailPage = () => {
   
   useEffect(() => {
     // Find product by ID
-    const id = parseInt(productId);
-    const allProducts = [...products.watches, ...products.computers];
-    const foundProduct = allProducts.find(p => p.id === id);
+    const foundProduct = getProductById(productId);
     
     // Simulate loading
     const timer = setTimeout(() => {
@@ -54,8 +52,9 @@ const ProductDetailPage = () => {
         setProduct(foundProduct);
         
         // Get related products from the same category
+        const allProducts = getAllProducts();
         const related = allProducts
-          .filter(p => p.category === foundProduct.category && p.id !== id)
+          .filter(p => p.category === foundProduct.category && p.id !== foundProduct.id)
           .slice(0, 4);
         setRelatedProducts(related);
       }
@@ -221,7 +220,7 @@ const ProductDetailPage = () => {
           {/* Category */}
           <motion.div variants={itemVariants}>
             <Chip 
-              label={product.category === 'watches' ? 'Watch' : 'Computer'} 
+              label={product.category.charAt(0).toUpperCase() + product.category.slice(1)} 
               color="primary" 
               size="small" 
               sx={{ mb: 2 }}
