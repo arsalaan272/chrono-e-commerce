@@ -9,9 +9,7 @@ import {
   useTheme, 
   useMediaQuery 
 } from '@mui/material';
-import { 
-  Watch as WatchIcon
-} from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -172,7 +170,7 @@ const Hero = () => {
                     to="/products"
                     variant="contained"
                     color="primary"
-                    startIcon={<WatchIcon />}
+                    startIcon={<i className="ri-shopping-bag-line" />}
                   >
                     Shop Now
                   </CategoryButton>
@@ -182,7 +180,7 @@ const Hero = () => {
                     to="/category/smart-watches"
                     variant="contained"
                     color="secondary"
-                    startIcon={<WatchIcon />}
+                    startIcon={<i className="ri-window-line" />}
                   >
                     Browse Categories
                   </CategoryButton>
@@ -323,7 +321,7 @@ const Hero = () => {
                   height: '200%', // Double height for seamless loop
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
-                  gridTemplateRows: 'repeat(4, 1fr)', // 4 rows for seamless loop
+                  gridTemplateRows: 'repeat(6, 1fr)', // 6 rows for seamless loop
                   gap: 2,
                   p: 2,
                 }}
@@ -366,7 +364,7 @@ const Hero = () => {
                   }}
                 />
                 
-                {/* Bottom Left - Laptop */}
+                {/* Middle Left - Laptop */}
                 <Box
                   sx={{
                     width: '100%',
@@ -380,12 +378,40 @@ const Hero = () => {
                   }}
                 />
                 
-                {/* Bottom Right - Grocery */}
+                {/* Middle Right - Grocery */}
                 <Box
                   sx={{
                     width: '100%',
                     height: '100%',
                     background: 'url(https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Bottom Left - Grocery */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Bottom Right - Sunglasses */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=500&auto=format&fit=crop)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     borderRadius: 3,
@@ -443,6 +469,34 @@ const Hero = () => {
                     width: '100%',
                     height: '100%',
                     background: 'url(https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500&auto=format&fit=crop)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Bottom Left - Grocery */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: 3,
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+                    border: '3px solid white',
+                  }}
+                />
+                
+                {/* Bottom Right - Sunglasses */}
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'url(https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=500&auto=format&fit=crop)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     borderRadius: 3,

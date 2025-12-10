@@ -3,7 +3,7 @@ const products = {
     {
       id: 1,
       name: "Apple Watch Series 9",
-      price: 399.99,
+      price: 35999.10,
       image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop",
       description: "Advanced smartwatch with health monitoring, GPS, and cellular connectivity.",
       category: "smart-watches",
@@ -14,7 +14,7 @@ const products = {
     {
       id: 2,
       name: "Samsung Galaxy Watch 6",
-      price: 349.99,
+      price: 31499.10,
       image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?q=80&w=1000&auto=format&fit=crop",
       description: "Premium smartwatch with fitness tracking and sleep monitoring capabilities.",
       category: "smart-watches",
@@ -25,7 +25,7 @@ const products = {
     {
       id: 3,
       name: "Fitbit Versa 4",
-      price: 199.99,
+      price: 17999.10,
       image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1000&auto=format&fit=crop",
       description: "Fitness-focused smartwatch with comprehensive health metrics and workout modes.",
       category: "smart-watches",
@@ -38,7 +38,7 @@ const products = {
     {
       id: 4,
       name: "iPhone 15 Pro",
-      price: 999.99,
+      price: 89999.10,
       image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=1000&auto=format&fit=crop",
       description: "Latest iPhone with A17 Pro chip, ProMotion display, and advanced camera system.",
       category: "smart-mobiles",
@@ -49,7 +49,7 @@ const products = {
     {
       id: 5,
       name: "Samsung Galaxy S24 Ultra",
-      price: 1199.99,
+      price: 107999.10,
       image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000&auto=format&fit=crop",
       description: "Flagship Android phone with S Pen, 200MP camera, and AI-powered features.",
       category: "smart-mobiles",
@@ -60,7 +60,7 @@ const products = {
     {
       id: 6,
       name: "Google Pixel 8 Pro",
-      price: 899.99,
+      price: 80999.10,
       image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?q=80&w=1000&auto=format&fit=crop",
       description: "Premium Android phone with exceptional camera and Google AI integration.",
       category: "smart-mobiles",
@@ -73,7 +73,7 @@ const products = {
     {
       id: 7,
       name: "MacBook Pro 16-inch",
-      price: 2499.99,
+      price: 224999.10,
       image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1000&auto=format&fit=crop",
       description: "Powerful laptop with M3 Pro chip, Liquid Retina XDR display, and all-day battery.",
       category: "laptops",
@@ -84,7 +84,7 @@ const products = {
     {
       id: 8,
       name: "Dell XPS 15",
-      price: 1799.99,
+      price: 161999.10,
       image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=1000&auto=format&fit=crop",
       description: "Premium Windows laptop with 4K OLED display and powerful performance.",
       category: "laptops",
@@ -95,7 +95,7 @@ const products = {
     {
       id: 9,
       name: "HP Spectre x360",
-      price: 1299.99,
+      price: 116999.10,
       image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=1000&auto=format&fit=crop",
       description: "Convertible 2-in-1 laptop with touchscreen and premium design.",
       category: "laptops",
@@ -108,7 +108,7 @@ const products = {
     {
       id: 10,
       name: "Organic Fresh Vegetables Pack",
-      price: 24.99,
+      price: 2249.10,
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop",
       description: "Fresh organic vegetables including tomatoes, lettuce, carrots, and bell peppers.",
       category: "grocery",
@@ -119,7 +119,7 @@ const products = {
     {
       id: 11,
       name: "Premium Coffee Beans",
-      price: 19.99,
+      price: 1799.10,
       image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=1000&auto=format&fit=crop",
       description: "Arabica coffee beans, medium roast, perfect for your morning brew.",
       category: "grocery",
@@ -130,7 +130,7 @@ const products = {
     {
       id: 12,
       name: "Organic Honey",
-      price: 14.99,
+      price: 1349.10,
       image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=1000&auto=format&fit=crop",
       description: "Pure organic honey, raw and unfiltered, sourced from local beekeepers.",
       category: "grocery",

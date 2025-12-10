@@ -16,14 +16,7 @@ import {
   Step,
   StepLabel
 } from '@mui/material';
-import { 
-  Add as AddIcon, 
-  Remove as RemoveIcon, 
-  Delete as DeleteIcon,
-  ShoppingCart as ShoppingCartIcon,
-  ArrowBack as ArrowBackIcon,
-  CheckCircle as CheckCircleIcon
-} from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -138,7 +131,7 @@ const CartPage = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <ShoppingCartIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
+            <i className="ri-shopping-cart-line" style={{ fontSize: '80px', color: 'gray', marginBottom: '16px', display: 'block' }} />
           </motion.div>
           <Typography variant="h4" gutterBottom>
             Your cart is empty
@@ -152,7 +145,7 @@ const CartPage = () => {
             variant="contained" 
             color="primary" 
             size="large"
-            startIcon={<ArrowBackIcon />}
+            startIcon={<i className="ri-arrow-left-line" />}
             sx={{ mt: 2 }}
           >
             Continue Shopping
@@ -217,7 +210,7 @@ const CartPage = () => {
                         size="small" 
                         onClick={() => handleQuantityChange(item, 'decrease')}
                       >
-                        <RemoveIcon fontSize="small" />
+                        <i className="ri-subtract-line" style={{ fontSize: '18px' }} />
                       </IconButton>
                       <Typography sx={{ mx: 1, minWidth: 20, textAlign: 'center' }}>
                         {item.quantity}
@@ -226,12 +219,12 @@ const CartPage = () => {
                         size="small" 
                         onClick={() => handleQuantityChange(item, 'increase')}
                       >
-                        <AddIcon fontSize="small" />
+                        <i className="ri-add-line" style={{ fontSize: '18px' }} />
                       </IconButton>
                     </Box>
                     
                     <Typography variant="subtitle1" fontWeight="bold" sx={{ minWidth: 80, textAlign: 'right' }}>
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ₹{(item.price * item.quantity).toFixed(2)}
                     </Typography>
                     
                     <IconButton 
@@ -239,7 +232,7 @@ const CartPage = () => {
                       sx={{ ml: 1 }}
                       onClick={() => handleRemoveItem(item)}
                     >
-                      <DeleteIcon />
+                      <i className="ri-delete-bin-line" style={{ fontSize: '20px' }} />
                     </IconButton>
                   </Paper>
                 </motion.div>
@@ -251,7 +244,7 @@ const CartPage = () => {
             <Button 
               component={Link} 
               to="/products" 
-              startIcon={<ArrowBackIcon />}
+              startIcon={<i className="ri-arrow-left-line" />}
               variant="outlined"
             >
               Continue Shopping
@@ -261,7 +254,7 @@ const CartPage = () => {
               onClick={clearCart} 
               color="error" 
               variant="outlined"
-              startIcon={<DeleteIcon />}
+              startIcon={<i className="ri-delete-bin-line" />}
             >
               Clear Cart
             </Button>
@@ -286,7 +279,7 @@ const CartPage = () => {
                       Subtotal ({cart.totalItems} {cart.totalItems === 1 ? 'item' : 'items'})
                     </Typography>
                     <Typography variant="body1" fontWeight="bold">
-                      ${cart.totalPrice.toFixed(2)}
+                      ₹{cart.totalPrice.toFixed(2)}
                     </Typography>
                   </Box>
                   
@@ -304,7 +297,7 @@ const CartPage = () => {
                       Tax
                     </Typography>
                     <Typography variant="body1">
-                      ${(cart.totalPrice * 0.1).toFixed(2)}
+                      ₹{(cart.totalPrice * 0.1).toFixed(2)}
                     </Typography>
                   </Box>
                 </Box>
@@ -316,7 +309,7 @@ const CartPage = () => {
                     Total
                   </Typography>
                   <Typography variant="h6" fontWeight="bold" color="primary">
-                    ${(cart.totalPrice + cart.totalPrice * 0.1).toFixed(2)}
+                    ₹{(cart.totalPrice + cart.totalPrice * 0.1).toFixed(2)}
                   </Typography>
                 </Box>
                 
@@ -430,7 +423,7 @@ const CartPage = () => {
         </Grid>
         
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-          <Button onClick={handleBack} startIcon={<ArrowBackIcon />}>
+          <Button onClick={handleBack} startIcon={<i className="ri-arrow-left-line" />}>
             Back to Cart
           </Button>
           <Button 
@@ -514,7 +507,7 @@ const CartPage = () => {
               Subtotal
             </Typography>
             <Typography variant="body1">
-              ${cart.totalPrice.toFixed(2)}
+              ₹{cart.totalPrice.toFixed(2)}
             </Typography>
           </Box>
           
@@ -532,7 +525,7 @@ const CartPage = () => {
               Tax
             </Typography>
             <Typography variant="body1">
-              ${(cart.totalPrice * 0.1).toFixed(2)}
+              ₹{(cart.totalPrice * 0.1).toFixed(2)}
             </Typography>
           </Box>
           
@@ -543,14 +536,14 @@ const CartPage = () => {
               Total
             </Typography>
             <Typography variant="h6" fontWeight="bold" color="primary">
-              ${(cart.totalPrice + cart.totalPrice * 0.1).toFixed(2)}
+              ₹{(cart.totalPrice + cart.totalPrice * 0.1).toFixed(2)}
             </Typography>
           </Box>
         </Box>
         
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-          <Button onClick={handleBack} startIcon={<ArrowBackIcon />}>
-            Back to Shipping
+          <Button onClick={handleBack} startIcon={<i className="ri-arrow-left-line" />}>
+            Back to Shopping
           </Button>
           <Button 
             variant="contained" 
@@ -574,7 +567,7 @@ const CartPage = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <CheckCircleIcon sx={{ fontSize: 100, color: 'success.main', mb: 3 }} />
+          <i className="ri-check-double-line" style={{ fontSize: '100px', color: '#4caf50', marginBottom: '24px', display: 'block' }} />
         </motion.div>
         
         <Typography variant="h4" gutterBottom fontWeight="bold">

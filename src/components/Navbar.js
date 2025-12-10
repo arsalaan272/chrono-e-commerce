@@ -17,16 +17,7 @@ import {
   useTheme,
   Divider
 } from '@mui/material';
-import { 
-  ShoppingCart as ShoppingCartIcon, 
-  Menu as MenuIcon,
-  Watch as WatchIcon,
-  PhoneAndroid as PhoneIcon,
-  Laptop as LaptopIcon,
-  ShoppingBasket as GroceryIcon,
-  Home as HomeIcon,
-  Info as InfoIcon
-} from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import ThemeToggle from './ThemeToggle';
@@ -103,12 +94,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { text: 'Home', path: '/', icon: <HomeIcon /> },
-    { text: 'Watches', path: '/category/smart-watches', icon: <WatchIcon /> },
-    { text: 'Mobiles', path: '/category/smart-mobiles', icon: <PhoneIcon /> },
-    { text: 'Laptops', path: '/category/laptops', icon: <LaptopIcon /> },
-    { text: 'Grocery', path: '/category/grocery', icon: <GroceryIcon /> },
-    { text: 'About', path: '/about', icon: <InfoIcon /> },
+    { text: 'Home', path: '/', icon: <i className="ri-home-line" /> },
+    { text: 'Watches', path: '/category/smart-watches', icon: <i className="ri-time-line" /> },
+    { text: 'Mobiles', path: '/category/smart-mobiles', icon: <i className="ri-smartphone-line" /> },
+    { text: 'Laptops', path: '/category/laptops', icon: <i className="ri-computer-line" /> },
+    { text: 'Grocery', path: '/category/grocery', icon: <i className="ri-shopping-bag-line" /> },
+    { text: 'About', path: '/about', icon: <i className="ri-information-line" /> },
   ];
 
   const toggleMobileMenu = () => {
@@ -177,7 +168,7 @@ const Navbar = () => {
                 sx={{ ml: 1 }}
               >
                 <Badge badgeContent={cart.totalItems} color="secondary">
-                  <ShoppingCartIcon />
+                  <i className="ri-shopping-cart-line" style={{ fontSize: '24px' }} />
                 </Badge>
               </IconButton>
             </motion.div>
@@ -191,7 +182,7 @@ const Navbar = () => {
                 onClick={toggleMobileMenu}
                 sx={{ ml: 1 }}
               >
-                <MenuIcon />
+                <i className="ri-menu-line" style={{ fontSize: '24px' }} />
               </IconButton>
             )}
           </Toolbar>

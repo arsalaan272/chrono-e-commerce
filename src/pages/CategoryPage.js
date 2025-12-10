@@ -4,7 +4,7 @@ import { Box, Container, Typography, Breadcrumbs, Link } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 import ProductList from '../components/ProductList';
-import { getProductsByCategory } from '../services/productService';
+import { getProductsByCategory, getAllProducts } from '../services/productService';
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -16,8 +16,14 @@ const CategoryPage = () => {
   });
   
   useEffect(() => {
-    // Get products by category
-    const categoryProducts = getProductsByCategory(category);
+    // Get products by category or all products if no category
+    let categoryProducts;
+    if (!category) {
+      // If no category, show all products
+      categoryProducts = getAllProducts();
+    } else {
+      categoryProducts = getProductsByCategory(category);
+    }
     setCategoryProducts(categoryProducts);
     
     // Set category info based on URL parameter
@@ -54,13 +60,20 @@ const CategoryPage = () => {
       },
     };
 
-    if (categoryMap[category]) {
+    if (!category) {
+      // Show all products
+      setCategoryInfo({
+        title: 'All Products',
+        description: 'Explore our complete collection of products from all categories. Find exactly what you\'re looking for with our wide selection of quality items.',
+        image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1000&auto=format&fit=crop'
+      });
+    } else if (categoryMap[category]) {
       setCategoryInfo(categoryMap[category]);
     } else {
-      // Default to all products if category is not recognized
-      const categoryName = category ? category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'All';
+      // Default for unrecognized categories
+      const categoryName = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       setCategoryInfo({
-        title: categoryName === 'All' ? 'All Products' : categoryName,
+        title: categoryName,
         description: `Browse our complete collection of ${categoryName.toLowerCase()} products.`,
         image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1000&auto=format&fit=crop'
       });

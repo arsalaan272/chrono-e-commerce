@@ -14,14 +14,12 @@ import {
   Chip,
   IconButton,
   Divider,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
-import {
-  Add as AddIcon,
-  Delete as DeleteIcon,
-  Logout as LogoutIcon,
-  AdminPanelSettings,
-  CheckCircle,
-} from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { addProduct, getAllProducts, deleteProduct } from '../services/productService';
@@ -205,7 +203,7 @@ const AdminDashboard = () => {
             <GradientHeader>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <AdminPanelSettings sx={{ fontSize: 40 }} />
+                  <i className="ri-admin-line" style={{ fontSize: '40px' }} />
                   <Box>
                     <Typography variant="h5" component="h1" fontWeight="bold" sx={{ mb: 0.5 }}>
                       CHRONO E-COMMERCE
@@ -221,7 +219,7 @@ const AdminDashboard = () => {
                 <Button
                   variant="outlined"
                   color="inherit"
-                  startIcon={<LogoutIcon />}
+                  startIcon={<i className="ri-logout-circle-r-line" />}
                   onClick={handleLogout}
                   sx={{
                     borderColor: 'rgba(255, 255, 255, 0.5)',
@@ -242,7 +240,7 @@ const AdminDashboard = () => {
               {success && (
                 <Alert
                   severity="success"
-                  icon={<CheckCircle />}
+                  icon={<i className="ri-check-double-line" />}
                   sx={{ mb: 3, borderRadius: 2 }}
                   onClose={() => setSuccess('')}
                 >
@@ -275,18 +273,23 @@ const AdminDashboard = () => {
                       sx={{ mb: 2 }}
                     />
 
-                    <TextField
-                      fullWidth
-                      label="Category"
-                      name="category"
-                      value={formData.category}
-                      onChange={handleInputChange}
-                      required
-                      margin="normal"
-                      placeholder="e.g., electronics, clothing, books"
-                      helperText="Enter any category name"
-                      sx={{ mb: 2 }}
-                    />
+                    <FormControl fullWidth margin="normal" sx={{ mb: 2 }} required>
+                      <InputLabel>Category</InputLabel>
+                      <Select
+                        name="category"
+                        value={formData.category}
+                        onChange={handleInputChange}
+                        label="Category"
+                      >
+                        <MenuItem value="">
+                          <em>Select a category</em>
+                        </MenuItem>
+                        <MenuItem value="smart-watches">Smart Watches</MenuItem>
+                        <MenuItem value="smart-mobiles">Smart Mobiles</MenuItem>
+                        <MenuItem value="laptops">Laptops</MenuItem>
+                        <MenuItem value="grocery">Grocery</MenuItem>
+                      </Select>
+                    </FormControl>
 
                     <TextField
                       fullWidth
@@ -363,7 +366,7 @@ const AdminDashboard = () => {
                           onClick={handleAddFeature}
                           sx={{ minWidth: 'auto', px: 2 }}
                         >
-                          <AddIcon />
+                          <i className="ri-add-line" />
                         </Button>
                       </Box>
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
@@ -400,7 +403,7 @@ const AdminDashboard = () => {
                         variant="contained"
                         color="primary"
                         size="large"
-                        startIcon={<AddIcon />}
+                        startIcon={<i className="ri-add-line" />}
                         sx={{
                           py: 1.5,
                           borderRadius: 2,
@@ -474,7 +477,7 @@ const AdminDashboard = () => {
                                 {product.category}
                               </Typography>
                               <Typography variant="body1" color="primary" fontWeight="bold">
-                                ${product.price.toFixed(2)}
+                                ₹{product.price.toFixed(2)}
                               </Typography>
                             </Box>
                             <IconButton
@@ -482,7 +485,7 @@ const AdminDashboard = () => {
                               onClick={() => handleDeleteProduct(product.id)}
                               sx={{ alignSelf: 'flex-start' }}
                             >
-                              <DeleteIcon />
+                              <i className="ri-delete-bin-line" style={{ fontSize: '20px' }} />
                             </IconButton>
                           </Box>
                         </Paper>

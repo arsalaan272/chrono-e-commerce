@@ -18,14 +18,7 @@ import {
   Skeleton,
   Alert
 } from '@mui/material';
-import { 
-  ShoppingCart as ShoppingCartIcon, 
-  Favorite as FavoriteIcon, 
-  FavoriteBorder as FavoriteBorderIcon,
-  Add as AddIcon,
-  Remove as RemoveIcon,
-  ArrowBack as ArrowBackIcon
-} from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -154,7 +147,7 @@ const ProductDetailPage = () => {
         <Button 
           component={RouterLink} 
           to="/products" 
-          startIcon={<ArrowBackIcon />}
+          startIcon={<i className="ri-arrow-left-line" />}
           variant="contained"
         >
           Back to Products
@@ -247,7 +240,7 @@ const ProductDetailPage = () => {
           {/* Price */}
           <motion.div variants={itemVariants}>
             <Typography variant="h4" color="primary" fontWeight="bold" sx={{ mb: 3 }}>
-              ${product.price.toFixed(2)}
+              ₹{product.price.toFixed(2)}
             </Typography>
           </motion.div>
           
@@ -304,7 +297,7 @@ const ProductDetailPage = () => {
                     disabled={quantity <= 1}
                     size="small"
                   >
-                    <RemoveIcon />
+                    <i className="ri-subtract-line" style={{ fontSize: '18px' }} />
                   </IconButton>
                   <TextField
                     value={quantity}
@@ -318,7 +311,7 @@ const ProductDetailPage = () => {
                     onClick={incrementQuantity}
                     size="small"
                   >
-                    <AddIcon />
+                    <i className="ri-add-line" style={{ fontSize: '18px' }} />
                   </IconButton>
                 </Box>
               </Box>
@@ -332,7 +325,7 @@ const ProductDetailPage = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                startIcon={<ShoppingCartIcon />}
+                startIcon={<i className="ri-shopping-cart-line" />}
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
                 fullWidth
@@ -345,7 +338,7 @@ const ProductDetailPage = () => {
                 variant="outlined"
                 color="secondary"
                 size="large"
-                startIcon={favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                startIcon={favorite ? <i className="ri-heart-fill" style={{ color: '#d32f2f' }} /> : <i className="ri-heart-line" />}
                 onClick={toggleFavorite}
                 sx={{ minWidth: 'auto', px: 2 }}
               >
@@ -554,7 +547,7 @@ const ProductDetailPage = () => {
                       {relatedProduct.description.substring(0, 60)}...
                     </Typography>
                     <Typography variant="h6" color="primary" fontWeight="bold">
-                      ${relatedProduct.price.toFixed(2)}
+                      ₹{relatedProduct.price.toFixed(2)}
                     </Typography>
                   </Box>
                 </motion.div>

@@ -11,11 +11,7 @@ import {
   Rating, 
   Stack 
 } from '@mui/material';
-import { 
-  ShoppingCart as ShoppingCartIcon, 
-  Favorite as FavoriteIcon,
-  FavoriteBorder as FavoriteBorderIcon
-} from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { IconButton as MuiIconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -132,8 +128,8 @@ const ProductCard = ({ product }) => {
               }}
             >
               {favorite ? 
-                <FavoriteIcon color="secondary" /> : 
-                <FavoriteBorderIcon />
+                <i className="ri-heart-fill" style={{ fontSize: '24px', color: '#d32f2f' }} /> : 
+                <i className="ri-heart-line" style={{ fontSize: '24px' }} />
               }
             </MuiIconButton>
           </motion.div>
@@ -188,7 +184,7 @@ const ProductCard = ({ product }) => {
           
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto' }}>
             <Typography variant="h6" color="primary" fontWeight="bold">
-              ${product.price.toFixed(2)}
+              ₹{product.price.toFixed(2)}
             </Typography>
             
             <motion.div
@@ -199,7 +195,7 @@ const ProductCard = ({ product }) => {
                 variant="contained"
                 color={isInCart ? "success" : "primary"}
                 size="small"
-                startIcon={<ShoppingCartIcon />}
+                startIcon={<i className="ri-shopping-cart-line" />}
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
                 sx={{

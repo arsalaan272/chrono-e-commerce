@@ -269,10 +269,26 @@ const HomePage = () => {
       />
       
       <CategoryBanner 
+        category="smart-mobiles"
+        title="Latest Smartphones"
+        description="Explore our collection of cutting-edge smartphones from top brands. Experience stunning displays, powerful processors, and advanced cameras. Find the perfect device that fits your lifestyle and budget."
+        image="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000&auto=format&fit=crop"
+        reverse={true}
+      />
+      
+      <CategoryBanner 
         category="laptops"
         title="Premium Laptops & Computing"
         description="Explore our range of powerful laptops and computing devices designed for every need. Whether you're a student, professional, or gamer, we have the perfect solution for you. All our devices feature the latest technology and premium components."
         image="https://images.unsplash.com/photo-1593640495253-23196b27a87f?q=80&w=1000&auto=format&fit=crop"
+        reverse={false}
+      />
+      
+      <CategoryBanner 
+        category="grocery"
+        title="Fresh Grocery & Essentials"
+        description="Shop fresh groceries and everyday essentials delivered right to your door. From organic produce to premium pantry staples, everything you need for a healthy lifestyle. Get the best quality at competitive prices."
+        image="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         reverse={true}
       />
       

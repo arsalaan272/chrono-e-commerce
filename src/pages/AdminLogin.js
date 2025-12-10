@@ -11,11 +11,7 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import {
-  Visibility,
-  VisibilityOff,
-  Lock as LockIcon,
-} from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -177,7 +173,7 @@ const AdminLogin = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <LockIcon color="action" />
+                      <i className="ri-lock-line" style={{ color: 'action' }} />
                     </InputAdornment>
                   ),
                   endAdornment: (
@@ -187,7 +183,7 @@ const AdminLogin = () => {
                         onClick={handleTogglePassword}
                         edge="end"
                       >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                        {showPassword ? <i className="ri-eye-off-line" /> : <i className="ri-eye-line" />}
                       </IconButton>
                     </InputAdornment>
                   ),

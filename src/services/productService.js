@@ -24,12 +24,8 @@ export const getAllProducts = () => {
 export const getProductsByCategory = (category) => {
   const allProducts = getAllProducts();
   
-  if (category === 'watches' || category === 'computers') {
-    return allProducts.filter(p => p.category === category);
-  }
-  
-  // For other categories or 'all', return all products
-  return allProducts;
+  // Filter products by category
+  return allProducts.filter(p => p.category === category);
 };
 
 // Get product by ID

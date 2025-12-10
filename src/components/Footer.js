@@ -14,15 +14,8 @@ import {
   Button,
   useTheme
 } from '@mui/material';
-import { 
-  Facebook as FacebookIcon, 
-  Twitter as TwitterIcon, 
-  Instagram as InstagramIcon, 
-  YouTube as YouTubeIcon,
-  Email as EmailIcon,
-  Phone as PhoneIcon,
-  LocationOn as LocationIcon
-} from '@mui/icons-material';
+import { Link as RouterLink } from 'react-router-dom';
+import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -106,21 +99,21 @@ const Footer = () => {
               We offer the best selection of timepieces and computing devices to suit your lifestyle.
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <LocationIcon color="primary" sx={{ mr: 1 }} />
+              <i className="ri-map-pin-line" style={{ marginRight: '8px', color: 'primary' }} />
               <Typography variant="body2" color="text.secondary">
-                123 Tech Avenue, Digital City, 10001
+                Telangana, Hyderabad, 500001
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <PhoneIcon color="primary" sx={{ mr: 1 }} />
+              <i className="ri-phone-line" style={{ marginRight: '8px', color: 'primary' }} />
               <Typography variant="body2" color="text.secondary">
-                +1 (555) 123-4567
+                +91 7386XXXXXX
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <EmailIcon color="primary" sx={{ mr: 1 }} />
+              <i className="ri-mail-line" style={{ marginRight: '8px', color: 'primary' }} />
               <Typography variant="body2" color="text.secondary">
-                info@chronotech.com
+                arsalaansairab8@gmail.com
               </Typography>
             </Box>
           </Grid>
@@ -131,11 +124,17 @@ const Footer = () => {
               Quick Links
             </Typography>
             <List dense disablePadding>
-              {['Home', 'About Us', 'Products', 'Contact', 'FAQ'].map((text) => (
-                <ListItem key={text} disablePadding sx={{ pb: 1 }}>
+              {[
+                { text: 'Home', path: '/' },
+                { text: 'Products', path: '/products' },
+                { text: 'About Us', path: '#' },
+                { text: 'Contact', path: '#' },
+                { text: 'FAQ', path: '#' }
+              ].map((link) => (
+                <ListItem key={link.text} disablePadding sx={{ pb: 1 }}>
                   <ListItemText 
                     primary={
-                      <FooterLink href="#">{text}</FooterLink>
+                      <FooterLink component={RouterLink} to={link.path}>{link.text}</FooterLink>
                     } 
                   />
                 </ListItem>
@@ -149,11 +148,16 @@ const Footer = () => {
               Categories
             </Typography>
             <List dense disablePadding>
-              {['Luxury Watches', 'Smart Watches', 'Gaming PCs', 'Laptops', 'Accessories'].map((text) => (
-                <ListItem key={text} disablePadding sx={{ pb: 1 }}>
+              {[
+                { text: 'Smart Watches', path: '/category/smart-watches' },
+                { text: 'Smartphones', path: '/category/smart-mobiles' },
+                { text: 'Laptops', path: '/category/laptops' },
+                { text: 'Grocery', path: '/category/grocery' }
+              ].map((link) => (
+                <ListItem key={link.text} disablePadding sx={{ pb: 1 }}>
                   <ListItemText 
                     primary={
-                      <FooterLink href="#">{text}</FooterLink>
+                      <FooterLink component={RouterLink} to={link.path}>{link.text}</FooterLink>
                     } 
                   />
                 </ListItem>
@@ -200,16 +204,16 @@ const Footer = () => {
               </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <SocialIconButton size="small" aria-label="facebook">
-                  <FacebookIcon fontSize="small" />
+                  <i className="ri-facebook-box-line" />
                 </SocialIconButton>
                 <SocialIconButton size="small" aria-label="twitter">
-                  <TwitterIcon fontSize="small" />
+                  <i className="ri-twitter-line" />
                 </SocialIconButton>
                 <SocialIconButton size="small" aria-label="instagram">
-                  <InstagramIcon fontSize="small" />
+                  <i className="ri-instagram-line" />
                 </SocialIconButton>
                 <SocialIconButton size="small" aria-label="youtube">
-                  <YouTubeIcon fontSize="small" />
+                  <i className="ri-youtube-line" />
                 </SocialIconButton>
               </Box>
             </Box>
@@ -220,7 +224,7 @@ const Footer = () => {
         
         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} CHRONO TECH. All rights reserved.
+            © {new Date().getFullYear()} CHRONO E-COMMERCE. All rights reserved.
           </Typography>
           <Box sx={{ display: 'flex', gap: 2 }}>
             <FooterLink href="#" variant="body2" color="text.secondary">

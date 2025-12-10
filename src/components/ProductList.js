@@ -13,7 +13,7 @@ import {
   Pagination,
   Skeleton
 } from '@mui/material';
-import { Search as SearchIcon } from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import ProductCard from './ProductCard';
 
@@ -139,7 +139,7 @@ const ProductList = ({ products, title, description }) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SearchIcon />
+                      <i className="ri-search-line" style={{ fontSize: '20px' }} />
                     </InputAdornment>
                   ),
                 }}

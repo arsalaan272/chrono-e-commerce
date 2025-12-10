@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton, Tooltip, Box } from '@mui/material';
-import { LightMode as LightModeIcon, DarkMode as DarkModeIcon } from '@mui/icons-material';
+import 'remixicon/fonts/remixicon.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useThemeMode } from '../context/ThemeContext';
 import { useTheme } from '@mui/material/styles';
@@ -71,8 +71,9 @@ const ThemeToggle = () => {
                 justifyContent: 'center',
               }}
             >
-              <DarkModeIcon 
-                sx={{ 
+              <i 
+                className="ri-sun-line"
+                style={{ 
                   fontSize: 28,
                   color: theme.palette.text.primary,
                 }} 
@@ -92,8 +93,9 @@ const ThemeToggle = () => {
                 justifyContent: 'center',
               }}
             >
-              <LightModeIcon 
-                sx={{ 
+              <i 
+                className="ri-moon-line"
+                style={{ 
                   fontSize: 28,
                   color: theme.palette.text.primary,
                 }} 
