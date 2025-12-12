@@ -1,0 +1,10 @@
+==> to see the cpu usage and other metrics using the metric server add the resources into the yaml file like cpu and memory usage.
+
+
+==> whenever installing the metric server disable the https verification otherwise the metric server will not run.
+
+
+==> edit deployment manually to edit the image there is no automatic image updating in the cluster after the image pushed to docker hub.
+
+
+==> add the name of the deployoment in the hpa yaml so it will referece to the pod and increase the pods accordingly.

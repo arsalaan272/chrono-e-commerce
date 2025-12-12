@@ -1,0 +1,11 @@
+==> made the app and exposed with nodeport
+
+==> created the workflow file and any comment will make a new docker image.
+
+==> installed metric server for sending the metrics over the network.
+
+to dos 
+
+==> have to install the hpa , prom and grafana 
+==> set up the hpa prom and granfana 
+==> make an autoscript file if clsuter gets deleted then just run it , it will do the work.

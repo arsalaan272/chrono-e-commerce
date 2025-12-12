@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend-container
+          image: arsalaan272/chrono-frontend:v7
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "300m"       # guaranteed CPU for the pod (0.1 CPU)
+              memory: "200Mi"   # guaranteed memory
+            limits:
+              cpu: "500m"       # max CPU this container can use (0.25 CPU)
+              memory: "400Mi"  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: NodePort
+  selector:
+    app: frontend
+  ports:
+    - port: 3000        # service port
+      targetPort: 3000  # container port
+      nodePort: 32000   # external port (you can choose 30000–32767)
