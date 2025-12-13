@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, Tooltip, Box } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import 'remixicon/fonts/remixicon.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useThemeMode } from '../context/ThemeContext';

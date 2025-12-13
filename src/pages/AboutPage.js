@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Card, CardContent, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Container, Typography, Grid, Card, CardContent, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import 'remixicon/fonts/remixicon.css';
@@ -51,7 +51,7 @@ const RemixIcon = styled.i`
 
 const AboutPage = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  // const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -13,7 +13,6 @@ import {
   Switch,
   Chip,
   IconButton,
-  Divider,
   Select,
   MenuItem,
   FormControl,
@@ -22,7 +21,7 @@ import {
 import 'remixicon/fonts/remixicon.css';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { addProduct, getAllProducts, deleteProduct } from '../services/productService';
+import { addProduct, deleteProduct } from '../services/productService';
 
 const StyledPaper = styled(Paper)`
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 247, 250, 0.98) 100%);
@@ -67,7 +66,6 @@ const AdminDashboard = () => {
   }, [navigate]);
 
   const loadProducts = () => {
-    const allProducts = getAllProducts();
     // Only show dynamic products (those added by admin)
     const dynamicProductsJson = localStorage.getItem('dynamicProducts');
     const dynamicProducts = dynamicProductsJson ? JSON.parse(dynamicProductsJson) : [];

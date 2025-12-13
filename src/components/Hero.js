@@ -96,14 +96,14 @@ const Hero = () => {
     }
   };
   
-  const imageVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.7, ease: "easeOut" }
-    }
-  };
+  // const imageVariants = {
+  //   hidden: { scale: 0.8, opacity: 0 },
+  //   visible: {
+  //     scale: 1,
+  //     opacity: 1,
+  //     transition: { duration: 0.7, ease: "easeOut" }
+  //   }
+  // };
   
   return (
     <HeroContainer sx={{ py: { xs: 8, md: 12 }, position: 'relative' }}>
